@@ -3,9 +3,10 @@ import tkinter as tk
 import ctypes
 import psutil
 import threading
-import time
+import time,sys
 
 from tkinter import messagebox
+
 
 class PVsZ(tk.Frame):
 	# This class defines the graphical user interface 
@@ -32,7 +33,9 @@ class PVsZ(tk.Frame):
 		# Build GUI
 		self.window.title("PlantsVsZombies Cheat")
 		self.window.resizable(width = False, height = False)
+
 		self.window.geometry("580x240") #wxh
+		
 		self.window.option_add('*tearOff', 'FALSE')
 		self.grid(column=0, row=0, sticky='ew')
 		self.grid_columnconfigure(0, weight=1, uniform='a')
@@ -250,6 +253,7 @@ class PVsZ(tk.Frame):
 		for pid in pids:
 			p = psutil.Process(pid)# get process name according to pid
 			process_name = p.name()
+			print(process_name)
 			if 'PlantsVsZombies' in process_name:
 				return pid
 
