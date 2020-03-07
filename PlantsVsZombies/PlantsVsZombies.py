@@ -1,8 +1,5 @@
 import tkinter as tk
-import win32process
-import win32con
-import win32api
-import win32gui
+#import win32process,win32con,win32api,win32gui
 import ctypes
 import psutil
 import threading
