@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import tkinter as tk # note that module name has changed from Tkinter in Python 2 to tkinter in Python 3
 from PlantsVsZombies.PlantsVsZombies import *
-from PlantsVsZombies.PlantsVsZombies_Mac import *
+from tkinter import messagebox
 
 def get_platform():
 	platforms = {
@@ -39,7 +39,8 @@ class My_Cheat(tk.Frame):
 		if Win:
 			PVsZ().start()
 		else:
-			PVsZ_MAC().start()
+			messagebox.showinfo("Sorry", "Do not support for Mac")
+			exit()
 
 		
 	def start(self):
