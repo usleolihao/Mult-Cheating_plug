@@ -1,5 +1,5 @@
 import tkinter as tk
-#import win32process,win32con,win32api,win32gui
+import win32process,win32con,win32api,win32gui
 import ctypes
 import psutil
 import threading
@@ -24,9 +24,9 @@ class PVsZ(tk.Frame):
 			exit()
 
 		#以最高权限打开进程
-		#self._p = win32api.OpenProcess(win32con.PROCESS_ALL_ACCESS, False, self._pid)
+		self._p = win32api.OpenProcess(win32con.PROCESS_ALL_ACCESS, False, self._pid)
 		#加载内核模块
-		#self._md = ctypes.windll.LoadLibrary(r'C:\Windows\System32\kernel32')
+		self._md = ctypes.windll.LoadLibrary(r'C:\Windows\System32\kernel32')
 		
 
 	def build_gui(self):                    
