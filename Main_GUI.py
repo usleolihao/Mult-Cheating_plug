@@ -1,7 +1,22 @@
 #!/usr/bin/python3
 import tkinter as tk # note that module name has changed from Tkinter in Python 2 to tkinter in Python 3
 from PlantsVsZombies.PlantsVsZombies import *
+from PlantsVsZombies.PlantsVsZombies_Mac import *
 
+def get_platform():
+	platforms = {
+		'linux1' : 'Linux',
+		'linux2' : 'Linux',
+		'darwin' : 'OS X',
+		'win32' : 'Windows'
+	}
+	if sys.platform not in platforms:
+		return sys.platform
+	
+	return platforms[sys.platform]
+
+global Win
+Win = True if get_platform() == 'Windows' else False
 
 class My_Cheat(tk.Frame):
 
@@ -19,7 +34,13 @@ class My_Cheat(tk.Frame):
 
 	def PlantsVsZombies(self):
 		self.window.destroy()
-		PVsZ().start()
+		global Win
+
+		if Win:
+			PVsZ().start()
+		else:
+			PVsZ_MAC().start()
+
 		
 	def start(self):
 		self.window.mainloop()
