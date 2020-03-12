@@ -29,22 +29,27 @@ class My_Cheat(tk.Frame):
 		#--------------------Windows-----------------------------------------
 		self.window = window
 		self.window.title("Cheat_plug")
-		self.window.geometry("300x"+ str(1*30))
+		self.window.geometry("300x"+ str(2*30))
 		self.window.resizable(width = False, height = False) #fix window size
+		global Win
+		if not Win:
+			messagebox.showinfo("Sorry", "Do not support for Mac")
+			exit()
 
 		#--------------------Games-------------------------------------------- 
-		tk.Button(self.window, text = "PlantsVsZombies",
+		tk.Button(self.window, text = "Plants Vs Zombies GOTY",
 				command = self.PlantsVsZombies,anchor = tk.W,width = 90).pack()
+
+		tk.Button(self.window, text = "Plague Inc: Evolved",
+				command = self.PlagueInc,anchor = tk.W,width = 90).pack()
+
+	def PlagueInc(self):
+		self.window.destroy()
 
 	def PlantsVsZombies(self):
 		self.window.destroy()
-		global Win
-
-		if Win:
-			PVsZ().start()
-		else:
-			messagebox.showinfo("Sorry", "Do not support for Mac")
-			exit()
+		PVsZ().start()
+			
 
 		
 	def start(self):
