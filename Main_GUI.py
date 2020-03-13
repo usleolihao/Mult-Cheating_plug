@@ -3,6 +3,7 @@ import tkinter as tk # note that module name has changed from Tkinter in Python 
 import os.path
 
 from PlantsVsZombies.PlantsVsZombies import *
+from PlagueInc.PlagueInc import *
 from tkinter import messagebox
 from os import path
 from shutil import copyfile
@@ -45,6 +46,7 @@ class My_Cheat(tk.Frame):
 
 	def PlagueInc(self):
 		self.window.destroy()
+		PlagueInc().start()
 
 	def PlantsVsZombies(self):
 		self.window.destroy()
