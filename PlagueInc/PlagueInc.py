@@ -12,12 +12,12 @@ from tkinter import messagebox
 
 class PlagueInc(tk.Frame):
 	# This class defines the graphical user interface 
-	def __init__(self, *args, **kwargs):
+	def __init__(self, version, *args, **kwargs):
 		#-------------------Basic Windows--------------------------------------
 		self.window = tk.Tk()
 		tk.Frame.__init__(self, self.window, *args, **kwargs)
+		self.version = version
 		self.build_gui()
-
 		#--------------------Mem-----------------------------------------------
 		self._pid = self.pid()
 
@@ -34,10 +34,10 @@ class PlagueInc(tk.Frame):
 
 	def build_gui(self):                    
 		# Build GUI
-		self.window.title("Plague Inc Cheat")
+		self.window.title("Plague Inc Cheat " + self.version)
 		self.window.resizable(width = False, height = False)
 
-		self.window.geometry("300x80") #wxh
+		self.window.geometry("350x80") #wxh
 
 		self.window.option_add('*tearOff', 'FALSE')
 		self.grid(column=0, row=0, sticky='ew')
@@ -63,7 +63,6 @@ class PlagueInc(tk.Frame):
 				#time.sleep(2)
 				self.dna_label.config(text=self.DNA())
 
-
 		info_update = threading.Thread(target=update, args=[])
 		info_update.daemon = True
 		info_update.start()
@@ -88,21 +87,38 @@ class PlagueInc(tk.Frame):
 
 	def DNA_mem(self):
 		Mem = ctypes.c_long()  #c语言中的长整形
-		#读取内存 + 210
-		Base = 0x06EC8938 + 0x210
-		self._md.ReadProcessMemory(int(self._p),Base,ctypes.byref(Mem),4,None)
-		# -7A40
-		Mem1 = Mem.value - 0x7A40
-		self._md.ReadProcessMemory(int(self._p),Mem1,ctypes.byref(Mem),4,None)
-		# +16C
-		Mem1 = Mem.value + 0x16C
-		self._md.ReadProcessMemory(int(self._p),Mem1,ctypes.byref(Mem),4,None)
-		# +248
-		Mem1 = Mem.value + 0x248
-		self._md.ReadProcessMemory(int(self._p),Mem1,ctypes.byref(Mem),4,None)
-		# +C
-		self.DNA_Mem = Mem.value + 0xC
-		self.DNA_Cum_Mem = Mem.value + 0x1CC
+		if self.version == "1.17.2":
+			#读取内存 + 210
+			Base = 0x06EC8938 + 0x210
+			self._md.ReadProcessMemory(int(self._p),Base,ctypes.byref(Mem),4,None)
+			# -7A40
+			Mem1 = Mem.value - 0x7A40
+			self._md.ReadProcessMemory(int(self._p),Mem1,ctypes.byref(Mem),4,None)
+			# +16C
+			Mem1 = Mem.value + 0x16C
+			self._md.ReadProcessMemory(int(self._p),Mem1,ctypes.byref(Mem),4,None)
+			# +248
+			Mem1 = Mem.value + 0x248
+			self._md.ReadProcessMemory(int(self._p),Mem1,ctypes.byref(Mem),4,None)
+			# +C
+			self.DNA_Mem = Mem.value + 0xC
+			self.DNA_Cum_Mem = Mem.value + 0x1CC
+		elif self.version =="1.17.4":
+			#读取内存 + 210
+			Base = 0x06A38928 + 0x210
+			self._md.ReadProcessMemory(int(self._p),Base,ctypes.byref(Mem),4,None)
+			# -7A40
+			Mem1 = Mem.value - 0x79E0
+			self._md.ReadProcessMemory(int(self._p),Mem1,ctypes.byref(Mem),4,None)
+			# +16C
+			Mem1 = Mem.value + 0x16C
+			self._md.ReadProcessMemory(int(self._p),Mem1,ctypes.byref(Mem),4,None)
+			# +248
+			Mem1 = Mem.value + 0x250
+			self._md.ReadProcessMemory(int(self._p),Mem1,ctypes.byref(Mem),4,None)
+			# +C
+			self.DNA_Mem = Mem.value + 0xC
+			self.DNA_Cum_Mem = Mem.value + 0x1CC
 
 	def DNA(self):
 		self.DNA_mem()
@@ -130,9 +146,8 @@ class PlagueInc(tk.Frame):
 add [edx + 1C4],ecx  可能记录累计DNA的数量
 ecx = 1 是要增加的数量
 eax = 2E 是DNA之后的数量之
-edi+04,eax
-edi =55C80008
-edi = 589C3008
+edi+04,eax    
+edi = 589C3008		556CFAA0
 如果放置被检测，需要EDI 和EDI+1C4 一起修改
 
 
@@ -173,4 +188,11 @@ PlagueExternalMP.dll + 1D128
 30587444
 30587A80    +54
 324EEC60	+10 move eax,[26E422F8]
+
+571FEBE0 + C
+571FE990 + 250
+1D6F4330 + 16C | 2FF08D20 + 14 | 3049BF80 + 54 |
+06413E70 - 79E0
+0641B850 + 210
+PlagueExternalMP.dll + 1D128 = 06A38928
 '''

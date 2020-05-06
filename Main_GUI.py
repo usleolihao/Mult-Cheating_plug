@@ -30,7 +30,7 @@ class My_Cheat(tk.Frame):
 		#--------------------Windows-----------------------------------------
 		self.window = window
 		self.window.title("Cheat_plug")
-		self.window.geometry("300x"+ str(2*30))
+		self.window.geometry("300x"+ str(3*30))
 		self.window.resizable(width = False, height = False) #fix window size
 		global Win
 		if not Win:
@@ -41,12 +41,15 @@ class My_Cheat(tk.Frame):
 		tk.Button(self.window, text = "Plants Vs Zombies GOTY",
 				command = self.PlantsVsZombies,anchor = tk.W,width = 90).pack()
 
-		tk.Button(self.window, text = "Plague Inc: Evolved",
-				command = self.PlagueInc,anchor = tk.W,width = 90).pack()
+		tk.Button(self.window, text = "Plague Inc: Evolved 1.17.2",
+				command = lambda: self.PlagueInc("1.17.2"),anchor = tk.W,width = 90).pack()
 
-	def PlagueInc(self):
+		tk.Button(self.window, text = "Plague Inc: Evolved 1.17.4",
+				command = lambda: self.PlagueInc("1.17.4"),anchor = tk.W,width = 90).pack()
+
+	def PlagueInc(self,version):
 		self.window.destroy()
-		PlagueInc().start()
+		PlagueInc(version).start()
 
 	def PlantsVsZombies(self):
 		self.window.destroy()
