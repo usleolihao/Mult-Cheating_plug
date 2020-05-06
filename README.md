@@ -22,3 +22,4 @@ copy the files in  pywin32_system32 into C:\Windows\System32
 ### Game Client
 [Plague Inc: Evolved](https://store.steampowered.com/app/246620/Plague_Inc_Evolved/)
 - Supported Version 1.17.2 (MP:109)
+- Supported Version 1.17.4
