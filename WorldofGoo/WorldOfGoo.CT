@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="26">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"基址偏移"</Description>
+      <LastState Value="1000" RealAddress="1D2B6E11E14"/>
+      <VariableType>8 Bytes</VariableType>
+      <Address>WorldOfGoo.exe + 1FF388</Address>
+      <Offsets>
+        <Offset>0x124</Offset>
+        <Offset>0x0C0</Offset>
+        <Offset>0x18</Offset>
+        <Offset>0x18</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"基址1"</Description>
+      <LastState Value="000001D29903F8A0" RealAddress="7FF7EE39F388"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>WorldOfGoo.exe+1FF388</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"基址2"</Description>
+      <LastState Value="000001D29903F8A0" RealAddress="7FF7EE39F4F0"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>WorldOfGoo.exe+1FF4F0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"基址3"</Description>
+      <LastState Value="000001D29903F8A0" RealAddress="7FF7EE39F648"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>WorldOfGoo.exe+1FF648</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"基址4"</Description>
+      <LastState Value="000001D29903F8A0" RealAddress="7FF7EE39F8F0"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>WorldOfGoo.exe+1FF8F0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"基址5"</Description>
+      <LastState Value="000001D29903F8A0" RealAddress="7FF7EE39F908"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>WorldOfGoo.exe+1FF908</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

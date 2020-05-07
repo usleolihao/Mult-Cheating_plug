@@ -4,6 +4,8 @@ import os.path
 
 from PlantsVsZombies.PlantsVsZombies import *
 from PlagueInc.PlagueInc import *
+from WorldofGoo.WorldOfGoo import *
+
 from tkinter import messagebox
 from os import path
 from shutil import copyfile
@@ -30,7 +32,7 @@ class My_Cheat(tk.Frame):
 		#--------------------Windows-----------------------------------------
 		self.window = window
 		self.window.title("Cheat_plug")
-		self.window.geometry("300x"+ str(3*30))
+		self.window.geometry("300x"+ str(4*30))
 		self.window.resizable(width = False, height = False) #fix window size
 		global Win
 		if not Win:
@@ -47,6 +49,9 @@ class My_Cheat(tk.Frame):
 		tk.Button(self.window, text = "Plague Inc: Evolved 1.17.4",
 				command = lambda: self.PlagueInc("1.17.4"),anchor = tk.W,width = 90).pack()
 
+		tk.Button(self.window, text = "World Of Goo",
+				command = lambda: self.WorldOfgoo(),anchor = tk.W,width = 90).pack()
+
 	def PlagueInc(self,version):
 		self.window.destroy()
 		PlagueInc(version).start()
@@ -54,8 +59,10 @@ class My_Cheat(tk.Frame):
 	def PlantsVsZombies(self):
 		self.window.destroy()
 		PVsZ().start()
-			
-
+	
+	def WorldOfgoo(self):
+		self.window.destroy()
+		WorldOfGoo().start()
 		
 	def start(self):
 		self.window.mainloop()
