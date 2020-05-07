@@ -24,5 +24,4 @@ copy the files in  pywin32_system32 into C:\Windows\System32
 - Supported Version 1.17.4
 
 ## World of Goo
-### Game Client
-[World of Goo](https://store.steampowered.com/app/22000/World_of_Goo/)
+### [Game Client](https://store.steampowered.com/app/22000/World_of_Goo/)
