@@ -1,6 +1,6 @@
 import tkinter as tk
 #import win32process
-import win32con,win32api,win32gui
+import win32con,win32api,win32gui,win32process
 import psutil,threading,time,sys
 import keyboard
 
@@ -29,7 +29,6 @@ class WorldOfGoo(tk.Frame):
 		#加载内核模块
 		self._md = c.windll.LoadLibrary(r'C:\Windows\System32\kernel32')
 
-		
 
 	def build_gui(self):                    
 		# Build GUI
@@ -73,9 +72,18 @@ class WorldOfGoo(tk.Frame):
 		
 		
 	def Goo_Mem(self):
+		modules = win32process.EnumProcessModules(self._p)
+		#for module in modules:
+			#fileName = win32process.GetModuleFileName(self._p, module)
+		#	print('{:016X}'.format(module))
+			#print(fileName)
+			#print(win32api.GetModuleHandle(fileName))
+		#self._p.close()
+		#print('Module address {:016X}'.format(modules[0]))
+
 		Mem = c.c_ulonglong()
 		bytesRead = c.c_ulonglong()
-		Base = 0x00007FF7EE39F388
+		Base = modules[0] + 0x1FF388
 
 		def prt(*args):
 			if len(args) > 0 and type(args[0]) is int:
@@ -96,7 +104,7 @@ class WorldOfGoo(tk.Frame):
 		#prt(0x0C0)
 		self.Goo_mem = Mem.value + 0x124
 		self.Goo_Cum_Mem = Mem.value + 0x110
-		#print('[{:016X}] & [{:016X}]'.format(self.Goo, self.Goo_Cum_Mem))
+		#print('[{:016X}] & [{:016X}]'.format(self.Goo_mem, self.Goo_Cum_Mem))
 
 	def Goo(self):
 		self.Goo_Mem()
