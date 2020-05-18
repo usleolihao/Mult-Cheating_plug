@@ -23,3 +23,5 @@ copy the files in  pywin32_system32 into C:\Windows\System32
 
 ## World of Goo
 [World of Goo](https://store.steampowered.com/app/22000/World_of_Goo/)
+- reset moves
+- add goos

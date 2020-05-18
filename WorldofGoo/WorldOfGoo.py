@@ -29,13 +29,21 @@ class WorldOfGoo(tk.Frame):
 		#加载内核模块
 		self._md = c.windll.LoadLibrary(r'C:\Windows\System32\kernel32')
 
+		self.module =  win32process.EnumProcessModules(self._p)[0]
+		#for module in modules:
+			#fileName = win32process.GetModuleFileName(self._p, module)
+		#	print('{:016X}'.format(module))
+			#print(fileName)
+			#print(win32api.GetModuleHandle(fileName))
+		#self._p.close()
+		#print('Module address {:016X}'.format(modules[0]))
 
 	def build_gui(self):                    
 		# Build GUI
 		self.window.title("World Of Goo Cheat ")
 		self.window.resizable(width = False, height = False)
 
-		self.window.geometry("300x60") #wxh
+		self.window.geometry("300x90") #wxh
 
 		#self.window.option_add('*tearOff', 'FALSE')
 		self.grid(column=0, row=0, sticky='ew')
@@ -50,11 +58,48 @@ class WorldOfGoo(tk.Frame):
 
 		tk.Label(text = "Press F1 add 1000 Goo", width=40, relief="groove").grid(row=1,column=0,columnspan = 2)
 
+		tk.Label(text = "F2 reset Moves", width=20, relief="groove").grid(row=2,column=0)
+		self.moves_label = tk.Label(text = "0", width=20, relief="groove")
+		self.moves_label.grid(row=2,column=1)
 
 	def start(self):
+		def update():
+			while True:
+				time.sleep(1)
+				self.moves()
+
+		info_update = threading.Thread(target=update, args=[])
+		info_update.daemon = True
+		info_update.start()
+
 		keyboard.on_press_key("F1", lambda _:self.addGoo(num = 1000))
+		keyboard.on_press_key("F2", lambda _:self.reset_Moves())
 		self.window.mainloop()
-		
+	
+	def moves_mem(self):
+		Mem = c.c_ulonglong()
+		bytesRead = c.c_ulonglong()
+		Base =self.module + 0x1FF4F0
+		self._md.ReadProcessMemory(int(self._p), c.c_void_p(Base), c.byref(Mem), c.sizeof(Mem), c.byref(bytesRead))
+		Base = Mem.value + 0x10
+		self._md.ReadProcessMemory(int(self._p),c.c_void_p(Base),c.byref(Mem),c.sizeof(Mem), c.byref(bytesRead))
+		return Mem.value + 0x2D0
+
+
+	def moves(self):
+		move = c.c_ulonglong()
+		bytesRead = c.c_ulonglong()
+		self._md.ReadProcessMemory(int(self._p),c.c_void_p(self.moves_mem()),c.byref(move),c.sizeof(move), c.byref(bytesRead))
+		self.moves_label.config(text=move)
+
+	def reset_Moves(self):
+		self.Goo_Mem()
+		try:
+			v = c.c_ulonglong(0)
+			self._md.WriteProcessMemory(int(self._p), c.c_void_p(self.moves_mem()), c.byref(v), c.sizeof(v), None)
+		except Exception as e:
+			raise e
+
 
 	def addGoo(self, num = 0):
 		self.Goo_Mem()
@@ -72,18 +117,9 @@ class WorldOfGoo(tk.Frame):
 		
 		
 	def Goo_Mem(self):
-		modules = win32process.EnumProcessModules(self._p)
-		#for module in modules:
-			#fileName = win32process.GetModuleFileName(self._p, module)
-		#	print('{:016X}'.format(module))
-			#print(fileName)
-			#print(win32api.GetModuleHandle(fileName))
-		#self._p.close()
-		#print('Module address {:016X}'.format(modules[0]))
-
 		Mem = c.c_ulonglong()
 		bytesRead = c.c_ulonglong()
-		Base = modules[0] + 0x1FF388
+		Base = self.module + 0x1FF388
 
 		def prt(*args):
 			if len(args) > 0 and type(args[0]) is int:
